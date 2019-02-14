@@ -80,7 +80,7 @@ type GetMessageStatusResponse struct {
 }
 
 type ArrayOfString struct {
-	XMLName xml.Name `xml:"http://turbosms.in.ua/api/Turbo ArrayOfString"`
+	//XMLName xml.Name `xml:"http://turbosms.in.ua/api/Turbo ArrayOfString"`
 
 	ResultArray []string `xml:"ResultArray,omitempty"`
 }
