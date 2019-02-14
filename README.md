@@ -8,24 +8,23 @@ Example
 
 ```golang
 
-
 package main
 
 import (
-    "log"
-    "fmt"
-    sms "github.com/wildsurfer/turbosms-go"
+	"fmt"
+	sms "github.com/wildsurfer/turbosms-go"
+	"log"
 )
 
 func main() {
-    c := sms.NewClient("myusername", "mypassword")
-    r, err := c.GetCreditBalance()
-    
-    if err != nil {
-        log.Fatal(err)
-    } else {
-        fmt.Printf("Credit balance: %s\n", r.GetCreditBalanceResult)
-    }
+	c := sms.NewClient("username", "password")
+	r, err := c.GetCreditBalance()
+
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Printf("Credit balance: %s\n", r.GetCreditBalanceResult)
+	}
 }
 
 ```

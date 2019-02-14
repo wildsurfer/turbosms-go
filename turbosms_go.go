@@ -1,7 +1,7 @@
 package turbosms_go
 
 import (
-	"turbosms-go/wsdl"
+	"github.com/wildsurfer/turbosms-go/wsdl"
 )
 
 type Client struct {
