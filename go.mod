@@ -1,1 +1,1 @@
-module turbosms_go
+module github.com/wildsurfer/turbosms-go
