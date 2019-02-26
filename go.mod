@@ -1,1 +1,1 @@
-module turbosms-go
+module turbosms_go
