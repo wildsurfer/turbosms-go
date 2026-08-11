@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/xml"
-	"io/ioutil"
+	"io"
 	"log"
 	"net"
 	"net/http"
@@ -309,7 +309,7 @@ func (s *SOAPClient) Call(soapAction string, request, response interface{}) erro
 	}
 	defer res.Body.Close()
 
-	rawbody, err := ioutil.ReadAll(res.Body)
+	rawbody, err := io.ReadAll(res.Body)
 	if err != nil {
 		return err
 	}
