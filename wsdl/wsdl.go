@@ -1,3 +1,5 @@
+// Package wsdl contains a SOAP client and types generated from the
+// TurboSMS WSDL by the gowsdl tool.
 package wsdl
 
 import (
@@ -17,7 +19,6 @@ var _ time.Time
 var _ xml.Name
 
 var cookieJar, _ = cookiejar.New(nil)
-var Debug bool
 
 type Auth struct {
 	XMLName xml.Name `xml:"http://turbosms.in.ua/api/Turbo Auth"`
@@ -98,6 +99,11 @@ func NewServiceSoap(url string, tls bool, auth *BasicAuth) *ServiceSoap {
 	return &ServiceSoap{
 		client: client,
 	}
+}
+
+// SetDebug enables logging of raw SOAP requests and responses.
+func (service *ServiceSoap) SetDebug(debug bool) {
+	service.client.Debug = debug
 }
 
 func (service *ServiceSoap) Auth(request *Auth) (*AuthResponse, error) {
@@ -190,9 +196,10 @@ type BasicAuth struct {
 }
 
 type SOAPClient struct {
-	url  string
-	tls  bool
-	auth *BasicAuth
+	url   string
+	tls   bool
+	auth  *BasicAuth
+	Debug bool
 }
 
 func (b *SOAPBody) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
@@ -275,7 +282,7 @@ func (s *SOAPClient) Call(soapAction string, request, response interface{}) erro
 	if err := encoder.Flush(); err != nil {
 		return err
 	}
-	if Debug == true {
+	if s.Debug {
 		log.Println(buffer.String())
 	}
 
@@ -317,7 +324,7 @@ func (s *SOAPClient) Call(soapAction string, request, response interface{}) erro
 		log.Println("empty response")
 		return nil
 	}
-	if Debug == true {
+	if s.Debug {
 		log.Println(string(rawbody))
 	}
 	respEnvelope := new(SOAPEnvelope)

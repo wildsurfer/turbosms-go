@@ -1,4 +1,4 @@
-package turbosms_go
+package turbosms
 
 import (
 	"net/http"
